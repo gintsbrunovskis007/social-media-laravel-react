@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Post;
+use App\Models\Comment;
 
 use Laravel\Sanctum\HasApiTokens;
 
@@ -36,5 +37,9 @@ class User extends Authenticatable
 
     public function posts(): HasMany{
         return $this->hasMany(Post::class);
+    }
+
+    public function comments(): HasMany{
+        return $this->hasMany(Comment::class);
     }
 }

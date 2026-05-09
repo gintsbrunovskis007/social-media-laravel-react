@@ -25,7 +25,7 @@ class PostController extends Controller implements HasMiddleware
 
     public function show(Post $post){
         // $post = $request->post();
-        return $post->load('user');
+        return $post->load(['user', 'comments.user']);
     }
 
     public function store(Request $request){
