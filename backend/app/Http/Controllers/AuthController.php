@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rule;
 
 class AuthController extends Controller
 {
@@ -57,33 +56,12 @@ class AuthController extends Controller
         ], 200);
     }
 
-    public function update(Request $request){
-        $user = $request->user();
-
-        $fields = $request->validate([
-            'name' => 'sometimes|required|string|max:255',
-            'email' => [
-                'sometimes',
-                'required',
-                'email',
-                Rule::unique('users')->ignore($user->id)
-            ],
-            'password' => 'sometimes|required|confirmed|min:8'
-        ]);
-
-        $user->update($fields);
-
-        return response([
-            'message' => 'Profile updated.',
-            'user' => $user
-        ], 200);
-    }
-
     public function destroy(Request $request){
         $user = $request->user();
+        $user->tokens()->delete();
         $user->delete();
         return response([
-            'message' => 'Account deleted.'
+            'message' => 'Your account has been permanently deleted.'
         ], 200);
     }
 
