@@ -36,7 +36,8 @@ class PostController extends Controller implements HasMiddleware
 
         $post = $request->user()->posts()->create($fields);
 
-        return $post;
+        // return $post;
+        return ['post' => $post, 'user' => $post->user];
     }
 
     public function update(Request $request, Post $post){
@@ -48,7 +49,7 @@ class PostController extends Controller implements HasMiddleware
 
         $post->update($fields);
 
-        return $post;
+        return ['post' => $post, 'user' => $post->user];
     }
 
     public function destroy(Post $post){

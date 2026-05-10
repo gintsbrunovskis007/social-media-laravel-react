@@ -38,6 +38,9 @@ export default function Layout() {
                   <button>Logout</button>
                 </form>
               </div>
+              <div>
+                <Link to="/create">New Post</Link>
+              </div>
             </div>
           ) : (
             <div>
